@@ -19,3 +19,4 @@ jobs:
       name: NPM Publish
       with:
         token: ${{ secrets.NPM_TOKEN }}
+        access: public

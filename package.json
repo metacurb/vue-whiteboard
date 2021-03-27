@@ -1,7 +1,11 @@
 {
-  "name": "vue-whiteboard",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@beauagst/vue-whiteboard",
+  "version": "0.1.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BeauAgst/vue-whiteboard.git"
+  },
+  "keywords": ["vue.js", "whiteboard", "draw", "d3", "vue", "vuejs", "component", "library"],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name VueWhiteboard src/components/vue-whiteboard.vue",
