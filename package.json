@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --target lib --name VueWhiteboard src/components/vue-whiteboard.vue",
     "lint": "vue-cli-service lint"
   },
+  "main": "./dist/VueWhiteboard.common.js",
+  "files": [ "dist/*"],
   "dependencies": {
     "core-js": "^3.6.5",
     "d3": "^6.6.1",
