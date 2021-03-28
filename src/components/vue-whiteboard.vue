@@ -196,6 +196,7 @@ export default {
     }
 
     const save = async () => {
+      if (!state.undoStack.length) return
       const svg = await saveSvg(state)
       emit('save')
       return svg
