@@ -1,5 +1,13 @@
 <template>
-  <vue-whiteboard class="whiteboard" :color="color" ref="whiteboard" size="10px" @dragend="on" />
+  <vue-whiteboard
+    class="whiteboard"
+    :color="color"
+    :line-styles="{
+      'mix-blend-mode': 'multiply',
+    }"
+    ref="whiteboard"
+    size="10px"
+  />
   <div class="box yellow" @click="color = '#ffc93b'"></div>
   <div class="box red" @click="color = '#ff555f'"></div>
   <div class="box black" @click="color = '#212121'"></div>
@@ -8,6 +16,7 @@
   <div @click="$refs.whiteboard.undo">undo</div>
   <div @click="$refs.whiteboard.redo">redo</div>
   <div @click="save">saveSvg</div>
+  <img :src="image" width="500" height="500" />
 </template>
 
 <script>
@@ -20,11 +29,12 @@ export default {
   },
   data: () => ({
     color: '#333333',
+    image: null,
   }),
   methods: {
     async save() {
       const res = await this.$refs.whiteboard.save()
-      console.log(res)
+      this.image = res
     },
   },
 }
@@ -36,10 +46,6 @@ body,
 #app {
   margin: 0;
   height: 100%;
-}
-
-.line {
-  mix-blend-mode: multiply;
 }
 
 .whiteboard {

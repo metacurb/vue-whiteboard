@@ -9,16 +9,21 @@
 
 <script>
 import { onMounted, reactive, toRefs } from 'vue'
-import { curveBasis, select, drag, line } from 'd3'
+import { curveBasis, drag, line, select } from 'd3'
 
 const setLineAttributes = (props) => {
-  return [
-    ['fill', 'none'],
-    ['stroke', props.color],
-    ['stroke-width', props.size],
-    ['stroke-linejoin', props.linejoin],
-    ['stroke-linecap', props.linecap],
-  ]
+  const styles = Object.assign(
+    {},
+    {
+      fill: 'none',
+      stroke: props.color,
+      'stroke-width': props.size,
+      'stroke-linejoin': props.linejoin,
+      'stroke-linecap': props.linecap,
+    },
+    props.lineStyles
+  )
+  return Object.entries(styles)
     .map(([key, value]) => `${key}: ${value};`)
     .join(' ')
 }
@@ -30,22 +35,22 @@ const getCoordinates = (event) => {
   return [offsetX, offsetY]
 }
 
-const clearSvg = (state) => state.svg.selectAll('*').remove()
+const clearSvg = (container) => container.selectAll('*').remove()
 
-const drawLine = (state, node) => state.svg.node().appendChild(node)
+const drawLine = (container, node) => container.node().appendChild(node)
 
 const undoAction = (state) => {
   if (!state.undoStack.length) return
   state.redoStack.push(state.undoStack.pop())
-  clearSvg(state)
-  state.undoStack.forEach((node) => drawLine(state, node))
+  clearSvg(state.svg)
+  state.undoStack.forEach((node) => drawLine(state.svg, node))
 }
 
 const redoAction = (state) => {
   if (!state.redoStack.length) return
   state.undoStack.push(state.redoStack.pop())
-  clearSvg(state)
-  state.undoStack.forEach((node) => drawLine(state, node))
+  clearSvg(state.svg)
+  state.undoStack.forEach((node) => drawLine(state.svg, node))
 }
 
 const nodeToSvg = (node) => {
@@ -61,8 +66,11 @@ const nodeToSvg = (node) => {
 
 const saveSvg = async (state) =>
   new Promise((resolve) => {
-    const node = state.container.cloneNode(true)
-    const svgData = nodeToSvg(node)
+    const container = state.container.cloneNode(true)
+    const svg = select(container)
+    clearSvg(svg)
+    state.undoStack.forEach((node) => drawLine(svg, node.cloneNode(true)))
+    const svgData = nodeToSvg(container)
 
     const width = state.container.clientWidth
     const height = state.container.clientHeight
@@ -93,6 +101,10 @@ export default {
     backgroundColor: {
       type: String,
       default: '#ffffff',
+    },
+    lineStyles: {
+      type: Object,
+      default: () => {},
     },
     size: {
       type: String,
@@ -141,7 +153,7 @@ export default {
             })
 
             event.on('drag', (event) => {
-              const coordinates = getCoordinates(event)
+              const coordinates = [event.x, event.y]
               state.activeLine.datum().push(coordinates)
               state.activeLine.attr('d', d3Line)
               emit('drag', {
@@ -155,7 +167,7 @@ export default {
               const node = state.activeLine.node()
               state.undoStack.push(node)
               emit('dragend', {
-                coordinates: getCoordinates(event),
+                coordinates: [event.x, event.y],
                 node,
                 options: Object.assign({}, props),
               })
@@ -177,7 +189,7 @@ export default {
     }
 
     const clear = () => {
-      clearSvg(state)
+      clearSvg(state.svg)
       state.undoStack = []
       state.redoStack = []
       emit('clear')

@@ -54,6 +54,7 @@ This library has no styles. It simply acts as a wrapper for the basic whiteboard
 | `size` | `string` | `5px` | `false` | Set brush size |
 | `linejoin` | `string` | `round` | `false` | Define the shape of two lines when joined together (`'miter'` , `'round'` , `'bevel'` , `'miter-clip'` , `'arcs'`) |
 | `linecap` | `string` | `round` | `false` | Define start and end shape of line (`'butt'`, `'square'`, `'round'`) |
+| `lineStyles` | `Object` | `{}` | `false` | Any extra line styles you'd like to apply. Will be inlined with the rest. |
 
 ## Events
 
