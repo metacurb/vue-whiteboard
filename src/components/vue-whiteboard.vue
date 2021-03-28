@@ -77,7 +77,6 @@ const saveSvg = async (state) =>
     image.onload = () => {
       context.clearRect(0, 0, width, height)
       context.drawImage(image, 0, 0, width, height)
-      console.log(canvas.toDataURL('image/png'))
       resolve(canvas.toDataURL('image/png'))
     }
 
@@ -179,8 +178,8 @@ export default {
 
     const clear = () => {
       clearSvg(state)
-      state.undo = []
-      state.redo = []
+      state.undoStack = []
+      state.redoStack = []
       emit('clear')
     }
 
