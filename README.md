@@ -3,6 +3,8 @@ Built using Vue 3, based upon the fantastic [ng-whiteboard](https://github.com/m
 
 This library has no styles. It simply acts as a wrapper for the basic whiteboard functionality.
 
+![vue-whiteboard in action](https://raw.githubusercontent.com/BeauAgst/vue-whiteboard/main/public/example.gif)
+
 ## Lightweight Vue whiteboard
 
 **Features:**
