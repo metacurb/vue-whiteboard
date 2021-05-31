@@ -19,7 +19,7 @@ This library has no styles. It simply acts as a wrapper for the basic whiteboard
 1. Install npm module:
 
   ```bash
-  npm i vue-whiteboard
+  npm i @beauagst/vue-whiteboard
   ```
 
 2. Add the module to your project
