@@ -3,7 +3,7 @@ Built using Vue 3, based upon the fantastic [ng-whiteboard](https://github.com/m
 
 This library has no styles. It simply acts as a wrapper for the basic whiteboard functionality.
 
-![vue-whiteboard in action](https://raw.githubusercontent.com/BeauAgst/vue-whiteboard/main/public/example.gif)
+![vue-whiteboard in action](https://raw.githubusercontent.com/metacurb/vue-whiteboard/main/public/example.gif)
 
 ## Lightweight Vue whiteboard
 
@@ -21,13 +21,13 @@ This library has no styles. It simply acts as a wrapper for the basic whiteboard
 1. Install npm module:
 
   ```bash
-  npm i @beauagst/vue-whiteboard
+  npm i @metacurb/vue-whiteboard
   ```
 
 2. Add the module to your project
 
   ```javascript
-  import VueWhiteboard from 'vue-whiteboard'
+  import VueWhiteboard from '@metacurb/vue-whiteboard'
   ...
 
   export default {

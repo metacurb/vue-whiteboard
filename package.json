@@ -1,9 +1,9 @@
 {
-  "name": "@beauagst/vue-whiteboard",
+  "name": "@metacurb/vue-whiteboard",
   "version": "0.1.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/BeauAgst/vue-whiteboard.git"
+    "url": "https://github.com/metacurb/vue-whiteboard.git"
   },
   "keywords": ["vue.js", "whiteboard", "draw", "d3", "vue", "vuejs", "component", "library"],
   "scripts": {
